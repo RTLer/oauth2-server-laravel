@@ -5,15 +5,17 @@
     'grant_types' => [
         'password' => [
             'class' => '\League\OAuth2\Server\Grant\PasswordGrant',
-            'callback' => '\App\PasswordVerifier@verify',
+            'callback' => '\App\PasswordGrantVerifier@verify',
             'access_token_ttl' => 3600
         ]
     ]
     ```
 
-2. Create a class with a `verify` method where you check if the provided user is a valid one.
+2. Create a class with a `verify` method where you check if the provided user is a valid one. In the following example you have to create a `PasswordGrantVerifier.php` in your `app` folder.
 
     ```php
+    namespace App;
+    
     use Illuminate\Support\Facades\Auth;
 
     class PasswordGrantVerifier
