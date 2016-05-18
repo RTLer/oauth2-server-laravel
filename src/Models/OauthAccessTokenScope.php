@@ -4,7 +4,7 @@ namespace LucaDegasperi\OAuth2Server\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OauthAccessToken extends Model
+class OauthAccessTokenScope extends Model
 {
 
     /**
@@ -12,26 +12,25 @@ class OauthAccessToken extends Model
      *
      * @var string
      */
-    protected $collection = 'oauth_access_tokens';
+    protected $collection = 'oauth_access_token_scopes';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['*'];
+    protected $fillable = [
+        'id',
+        'access_token_id',
+        'scope_id',
+    ];
 
     /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
+     * oauthScope.
      */
-//    protected $guarded = ['*'];
+    public function oauthScope()
+    {
+        return $this->belongsTo('LucaDegasperi\OAuth2Server\Models\OauthScope');
+    }
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-//    protected $hidden = ['*'];
 }

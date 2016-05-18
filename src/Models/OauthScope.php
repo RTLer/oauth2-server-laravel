@@ -16,26 +16,15 @@ class OauthScope extends Model
      *
      * @var string
      */
-    protected $collection = 'users';
+    protected $collection = 'oauth_scopes';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-//    protected $fillable = ['name', 'email', 'password'];
-
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = ['remember_token'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token'];
+    protected $fillable = [
+        'id',
+        'description'
+    ];
 }

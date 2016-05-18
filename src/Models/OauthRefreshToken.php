@@ -4,7 +4,7 @@ namespace LucaDegasperi\OAuth2Server\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OauthAccessToken extends Model
+class OauthRefreshToken extends Model
 {
 
     /**
@@ -12,26 +12,16 @@ class OauthAccessToken extends Model
      *
      * @var string
      */
-    protected $collection = 'oauth_access_tokens';
+    protected $collection = 'oauth_refresh_tokens';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['*'];
-
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-//    protected $guarded = ['*'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-//    protected $hidden = ['*'];
+    protected $fillable = [
+        'id',
+        'access_token_id',
+        'expire_time'
+    ];
 }

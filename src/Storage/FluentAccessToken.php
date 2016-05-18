@@ -15,6 +15,8 @@ use Carbon\Carbon;
 use League\OAuth2\Server\Entity\AccessTokenEntity;
 use League\OAuth2\Server\Entity\ScopeEntity;
 use League\OAuth2\Server\Storage\AccessTokenInterface;
+use LucaDegasperi\OAuth2Server\Models\OauthAccessToken;
+use LucaDegasperi\OAuth2Server\Models\OauthAccessTokenScope;
 
 /**
  * This is the fluent access token class.
@@ -32,8 +34,7 @@ class FluentAccessToken extends AbstractFluentAdapter implements AccessTokenInte
      */
     public function get($token)
     {
-        $result = $this->getConnection()->table('oauth_access_tokens')
-                ->where('oauth_access_tokens.id', $token)
+        $result = OauthAccessToken::where('id', $token)
                 ->first();
 
         if (is_null($result)) {
@@ -73,10 +74,7 @@ class FluentAccessToken extends AbstractFluentAdapter implements AccessTokenInte
      */
     public function getScopes(AccessTokenEntity $token)
     {
-        $result = $this->getConnection()->table('oauth_access_token_scopes')
-                ->select('oauth_scopes.*')
-                ->join('oauth_scopes', 'oauth_access_token_scopes.scope_id', '=', 'oauth_scopes.id')
-                ->where('oauth_access_token_scopes.access_token_id', $token->getId())
+        $result = OauthAccessTokenScope::where('access_token_id', $token->getId())
                 ->get();
 
         $scopes = [];
